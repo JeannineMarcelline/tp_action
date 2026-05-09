@@ -1,0 +1,39 @@
+# 1. Le nom de ta pipeline (apparaît sur l'interface GitHub)
+name: Ma Premiere Pipeline DevOps
+
+# 2. Quand est-ce que la pipeline se lance ?
+on:
+  push:
+    branches: [ "main" ]  # Se lance dès que tu envoies du code sur la branche main
+
+# 3. La liste des choses à faire (les jobs)
+jobs:
+  test-et-build:
+    # On demande à GitHub de nous prêter un ordinateur sous Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # ÉTAPE 1 : Récupérer ton code
+      # GitHub "clone" ton projet sur son serveur temporaire
+      - name: Recupere le code
+        uses: actions/checkout@v4
+
+      # ÉTAPE 2 : Vérification du fichier HTML
+      # On vérifie juste que le fichier existe pour ne pas builder pour rien
+      - name: Verifier si le fichier HTML existe
+        run: |
+          if [ -f index.html ]; then
+            echo "Le fichier index.html est bien présent."
+          else
+            echo "Erreur : index.html introuvable !"
+            exit 1
+          fi
+
+      # ÉTAPE 3 : Création de l'image Docker
+      # C'est ici qu'on transforme ton code en "paquet" prêt à l'emploi
+      - name: Build de l'image Docker
+        run: docker build -t mon-site-devops:latest .
+
+      # ÉTAPE 4 : Conclusion
+      - name: Message de succes
+        run: echo "Bravo ! L'image Docker est prête et le test est réussi."
