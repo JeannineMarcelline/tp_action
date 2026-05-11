@@ -1,7 +1,7 @@
 # 1. Le nom de ta pipeline (apparaît sur l'interface GitHub)
 name: Ma Premiere Pipeline DevOps
 
-# 2. Quand est-ce que la pipeline se lance ?
+# 2. Quand est-ce que la pipeline se lance ?  equivalent le trigger any jenkins 
 on:
   push:
     branches: [ "main" ]  # Se lance dès que tu envoies du code sur la branche main
@@ -9,7 +9,7 @@ on:
 # 3. La liste des choses à faire (les jobs)
 jobs:
   test-et-build:
-    # On demande à GitHub de nous prêter un ordinateur sous Ubuntu
+    # On demande à GitHub de nous prêter un ordinateur sous Ubuntu  tonga de detruit avy ampiasaina ephemere
     runs-on: ubuntu-latest
 
     steps:
