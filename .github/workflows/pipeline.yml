@@ -22,7 +22,7 @@ jobs:
       # On vérifie juste que le fichier existe pour ne pas builder pour rien
       - name: Verifier si le fichier HTML existe
         run: |
-          if [ -f fichier.html ]; then
+          if [ -f index.html ]; then
             echo "Le fichier index.html est bien présent."
           else
             echo "Erreur : index.html introuvable !"
